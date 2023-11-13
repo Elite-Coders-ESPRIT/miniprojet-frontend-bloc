@@ -11,7 +11,8 @@ const routes: Routes = [
   ]},
   {path:"admin",component: AdminLayoutComponent, children: [
        {path:"dashboard", loadChildren:()=>import ("./views/admin/dashboard/dashboard.module").then(m=>m.DashboardModule)},    
-       {path:"login", loadChildren:()=>import ("./views/admin/login-admin/login-admin.module").then(m=>m.LoginAdminModule)}
+       {path:"login", loadChildren:()=>import ("./views/admin/login-admin/login-admin.module").then(m=>m.LoginAdminModule)},
+       {path:"universite", loadChildren:()=>import ("./views/admin/universite/universite.module").then(m=>m.UniversiteModule)}
   ]}
 ];
 
