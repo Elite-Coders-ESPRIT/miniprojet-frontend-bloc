@@ -1,0 +1,150 @@
+<div class="mt-5">
+  <div class="col">
+  <div class="container-fluid py-4 ">
+    <div class="z-index-sticky">
+      <button mat-fab color="accent" (click)="openBlocAddForm()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div class="col my-4">
+    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+      <div class="input-group">
+            <span class="input-group-text text-body"
+            ><i class="fas fa-search" aria-hidden="true"></i
+            ></span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search blocks..."
+        />
+      </div>
+    </div>
+    </div>
+  </div>
+    <div class="row mx-1">
+      <div class="col-12 mx-3">
+        <div class="card mb-2">
+
+<!--          <div class="card-header pb-0">-->
+<!--            <h6>Liste des universités</h6>-->
+<!--          </div>-->
+          <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive p-0">
+              <table
+                class="table table-vcenter table-mobile-md card-table"
+                border="1"
+              >
+                <thead>
+                <tr>
+                  <th>Id Bloc</th>
+                  <th>Nom Bloc</th>
+                  <th>Capacite</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody *ngIf="blocs != null && (blocs.length > 0)">
+                <tr *ngFor="let bloc of blocs">
+                  <th>{{bloc.idBloc}}</th>
+                  <th><p>{{bloc.nomBloc}}</p></th>
+                  <td>{{bloc.capaciteBloc}} </td>
+                  <td class="col">
+                    <a class="btn text-success">
+                      <span class="material-icons"> expand </span></a>
+                    <a class="btn text-warning" (click)="openBlocUpdateForm(bloc)">
+                      <span class="material-icons"> edit </span></a>
+                    <a class="btn text-danger" *ngIf="bloc.idBloc != undefined" (click)="deleteItem(bloc.idBloc)">
+                      <span class="material-icons"> delete </span></a>
+                  </td>
+                </tr>
+                </tbody>
+                <tbody *ngIf="!blocs">
+                <tr><td class="row-cols-lg-1"><p class="alert alert-danger">ERROR GETTING BLOCKS</p></td></tr>
+                </tbody>
+                <tbody *ngIf="blocs!=null && !(blocs.length > 0)">
+                  <tr>
+                    <td>
+                      Blocs will show here after you add them.
+                    </td>
+                  </tr>
+                <tr>
+                    <td>
+                      Blocs will show here after you add them.
+                    </td>
+                  </tr>
+                <tr>
+                    <td>
+                      Blocs will show here after you add them.
+                    </td>
+                  </tr>
+                <tr>
+                    <td>
+                      Blocs will show here after you add them.
+                    </td>
+                  </tr>
+                <tr>
+                    <td>
+                      Blocs will show here after you add them.
+                    </td>
+                  </tr>
+                <tr>
+                    <td>
+                      Blocs will show here after you add them.
+                    </td>
+                  </tr>
+                <tr>
+                    <td>
+                      Blocs will show here after you add them.
+                    </td>
+                  </tr>
+                <tr>
+                    <td>
+                      Blocs will show here after you add them.
+                    </td>
+                  </tr>
+                <tr>
+                    <td>
+                      Blocs will show here after you add them.
+                    </td>
+                  </tr>
+                <tr>
+                    <td>
+                      Blocs will show here after you add them.
+                    </td>
+                  </tr>
+                <tr>
+                    <td>
+                      Blocs will show here after you add them.
+                    </td>
+                  </tr>
+                <tr>
+                    <td>
+                      Blocs will show here after you add them.
+                    </td>
+                  </tr>
+                <tr>
+                    <td>
+                      Blocs will show here after you add them.
+                    </td>
+                  </tr>
+                <tr>
+                    <td>
+                      Blocs will show here after you add them.
+                    </td>
+                  </tr>
+                <tr>
+                    <td>
+                      Blocs will show here after you add them.
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+

@@ -1,0 +1,105 @@
+<!--<div *ngIf="action==='add'">-->
+<!--<h2>Form in Dialog</h2>-->
+<!--<form>-->
+<!--  &lt;!&ndash; Your form fields go here &ndash;&gt;-->
+<!--  <label for="name">Name:</label>-->
+<!--  <input type="text" id="name" name="name" required>-->
+<!--  <br>-->
+<!--  <label for="email">Email:</label>-->
+<!--  <input type="email" id="email" name="email" required>-->
+<!--  <br>-->
+<!--  <button type="submit">Submit</button>-->
+<!--</form>-->
+<!--<button (click)="close()">Cancel</button>-->
+<!--</div>-->
+
+<!--<div *ngIf="action==='update'">-->
+<!--  <h2>Form in Dialog</h2>-->
+<!--  <form>-->
+<!--    &lt;!&ndash; Your form fields go here &ndash;&gt;-->
+<!--    <label for="name">Name:</label>-->
+<!--    <input type="text" id="name" name="name" required>-->
+<!--    <br>-->
+<!--    <label for="email">Email:</label>-->
+<!--    <input type="email" id="email" name="email" required>-->
+<!--    <br>-->
+<!--    <button type="submit">Update</button>-->
+<!--  </form>-->
+<!--  <button (click)="close()">Cancel</button>-->
+<!--</div>-->
+<div class="mx-3 my-4 "  *ngIf="action==='add'">
+<div class="card-body">
+  <form role="form">
+    <div class="mb-3">
+      <input type="text" class="form-control form-control-lg" placeholder="Nom bloc" aria-label="Nom bloc">
+    </div>
+    <div class="mb-3">
+      <input type="number" class="form-control form-control-lg" placeholder="Capacité" aria-label="Capacité">
+    </div>
+<!--    <div class="form-check form-switch">-->
+<!--      <input class="form-check-input" type="checkbox" id="rememberMe">-->
+<!--      <label class="form-check-label" for="rememberMe">Remember me</label>-->
+<!--    </div>-->
+    <div class="d-flex justify-content-center">
+      <div class="btn-group">
+        <button
+          type="button"
+          class="btn btn-secondary dropdown-toggle"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <i class=" cursor-pointer"></i>
+          Select foyer...
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end py-3">
+          <li class="mb-2">
+            <a class="dropdown-item border-radius-md" href="javascript:;">
+              <div class="d-flex">
+                <div class="justify-content-center">
+                  <h6 class="text-sm font-weight-normal mb-1">
+                    <span class="font-weight-bold">New album</span> by
+                    Travis Scott
+                  </h6>
+                  <p class="text-xs text-secondary mb-0">
+                    <i class="fa fa-clock me-1"></i>
+                    1 day
+                  </p>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="text-center">
+      <button type="button" class="btn btn-lg btn-outline-success btn-lg w-100 mt-4 mb-0">INSERT</button>
+    </div>
+    <div class="text-center">
+      <button type="button" class="btn btn-lg btn-outline-white btn-lg w-100 mt-4 mb-0">CANCEL</button>
+    </div>
+  </form>
+</div>
+</div>
+<div class="mx-3 my-4" *ngIf="action === 'update' && bloc">
+  <div class="card-body">
+    <form role="form">
+      <div class="mb-3">
+        <input [(ngModel)]="bloc.nomBloc" type="text" name="nomBloc" class="form-control form-control-lg" placeholder="Nom bloc" aria-label="Nom bloc">
+      </div>
+      <div class="mb-3">
+        <input [(ngModel)]="bloc.capaciteBloc" type="number" name="capaciteBloc" class="form-control form-control-lg" placeholder="Capacité" aria-label="Capacité">
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-lg btn-outline-success btn-lg w-100 mt-4 mb-0" (click)="onUpdate()">UPDATE</button>
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn btn-lg btn-outline-white btn-lg w-100 mt-4 mb-0" (click)="onCancel()">CANCEL</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+

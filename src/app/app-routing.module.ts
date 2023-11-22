@@ -7,12 +7,13 @@ const routes: Routes = [
   {path:"", component:FrontLayoutComponent, children:[
        {path:"", loadChildren:()=>import("./views/front/home/home.module").then(m=>m.HomeModule)},
        {path:"login", loadChildren:()=>import("./views/front/login-user/login-user.module").then(m=>m.LoginUserModule)},
-  
+
   ]},
   {path:"admin",component: AdminLayoutComponent, children: [
-       {path:"dashboard", loadChildren:()=>import ("./views/admin/dashboard/dashboard.module").then(m=>m.DashboardModule)},    
+       {path:"dashboard", loadChildren:()=>import ("./views/admin/dashboard/dashboard.module").then(m=>m.DashboardModule)},
        {path:"login", loadChildren:()=>import ("./views/admin/login-admin/login-admin.module").then(m=>m.LoginAdminModule)},
-       {path:"universite", loadChildren:()=>import ("./views/admin/universite/universite.module").then(m=>m.UniversiteModule)}
+       {path:"universite", loadChildren:()=>import ("./views/admin/universite/universite.module").then(m=>m.UniversiteModule)},
+       {path:"bloc", loadChildren:()=>import ("./views/admin/bloc/bloc.module").then(m=>m.BlocModule)},
   ]}
 ];
 
