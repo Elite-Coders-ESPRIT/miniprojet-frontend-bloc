@@ -4,6 +4,7 @@ import {Bloc} from "../model/bloc";
 import {Observable} from "rxjs";
 import { MatDialog } from '@angular/material/dialog';
 import {BlocFormComponent} from "../bloc-form/bloc-form.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-bloc-component',
@@ -12,7 +13,6 @@ import {BlocFormComponent} from "../bloc-form/bloc-form.component";
 })
 export class BlocComponentComponent implements OnInit{
 
-  observables? : Observable<Bloc[]>;
   blocs? : Bloc[];
 
   constructor(private blocService: BlocService,private dialog:MatDialog) {
@@ -57,16 +57,22 @@ export class BlocComponentComponent implements OnInit{
     })
   }
 
-  deleteItem(idBloc:any): void {
+
+
+  deleteItem(idBloc:string): void {
+
     const confirmed = window.confirm('Are you sure you want to delete?');
 
-     if (confirmed) {
-       console.log(idBloc);
+    if (confirmed) {
+      console.log(idBloc);
       this.blocService.deleteBloc(idBloc.toString());
-     } else {
-       console.log('Deletion canceled');
     }
-  }
+    else
+      {
+        console.log('Deletion canceled');
+      }
+    }
+
 
   updateBloc(bloc: Bloc): void {
     this.blocService.updateBloc(bloc).subscribe(updatedBloc => {

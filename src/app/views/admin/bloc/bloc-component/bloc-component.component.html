@@ -52,7 +52,7 @@
                       <span class="material-icons"> expand </span></a>
                     <a class="btn text-warning" (click)="openBlocUpdateForm(bloc)">
                       <span class="material-icons"> edit </span></a>
-                    <a class="btn text-danger" *ngIf="bloc.idBloc != undefined" (click)="deleteItem(bloc.idBloc)">
+                    <a class="btn text-danger" *ngIf="bloc.idBloc != undefined"  (click)="deleteItem(bloc.idBloc.toString())">
                       <span class="material-icons"> delete </span></a>
                   </td>
                 </tr>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {Observable} from "rxjs";
 import {Bloc} from "../model/bloc";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class BlocService {
 
   private baseUrl ="http://localhost:8081/bloc"
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private router:Router) {
 
   }
 
@@ -21,13 +22,19 @@ export class BlocService {
   }
 
 
+  refreshPage() {
+    console.log(this.router.url);
+    this.router.navigate(["/admin"]).then(() => {
+      this.router.navigate(["/admin/bloc"]);
+      console.log(this.router.url);
+    });
+  }
 
-  deleteBloc(idBloc: string | undefined): void {
-    if(idBloc == undefined){
-      console.log("undefined !!!!");
-    }else {
-      this.http.delete(this.baseUrl+"/deleteBloc/"+idBloc);
-    }
+  deleteBloc(idBloc: string): void {
+      this.http.delete(this.baseUrl+"/deleteBloc/"+idBloc).subscribe(value => {
+        console.log("item deleted");
+        this.refreshPage();
+      });
     console.log(this.baseUrl+"/deleteBloc/"+idBloc);
   }
 
