@@ -4,6 +4,7 @@ import {Bloc} from "../model/bloc";
 import { MatDialog } from '@angular/material/dialog';
 import {BlocFormComponent} from "../bloc-form/bloc-form.component";
 import {FilterByBlocNamePipe} from "../pipe/filter-by-bloc-name.pipe";
+import {Chambre} from "../model/chambre";
 
 @Component({
   selector: 'app-bloc-component',
@@ -15,6 +16,7 @@ export class BlocComponentComponent implements OnInit{
 
   blocs? : Bloc[];
   bloc? : Bloc;
+  chambres? : Chambre[];
   searchTerm: string = '';
 
   constructor(private blocService: BlocService,private dialog:MatDialog) {
@@ -61,6 +63,22 @@ export class BlocComponentComponent implements OnInit{
       }
     })
   }
+    openBlocShowForm(bloc: Bloc): void {
+    const dialogRef = this.dialog.open(BlocFormComponent, {
+      width: '50%',
+      height: '50%',
+      data : {
+        action : 'show',
+        bloc: bloc
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.updateBloc(result);
+      }
+    })
+  }
+
 
   deleteItem(idBloc:string): void {
     const confirmed = window.confirm('Are you sure you want to delete?');

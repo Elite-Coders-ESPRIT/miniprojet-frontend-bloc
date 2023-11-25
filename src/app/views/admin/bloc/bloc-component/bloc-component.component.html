@@ -33,7 +33,7 @@
               >
                 <thead>
                 <tr>
-                  <th>Id Bloc</th>
+<!--                  <th>Id Bloc</th>-->
                   <th>Nom Bloc</th>
                   <th>Capacite</th>
                   <th>Action</th>
@@ -41,11 +41,11 @@
                 </thead>
                 <tbody *ngIf="blocs != null && (blocs.length > 0)">
                 <tr *ngFor="let bloc of blocs | filterByBlocName : searchTerm">
-                  <th>{{bloc.idBloc}}</th>
+<!--                  <th>{{bloc.idBloc}}</th>-->
                   <th><p>{{bloc.nomBloc}}</p></th>
                   <td>{{bloc.capaciteBloc}} </td>
                   <td class="col">
-                    <a class="btn text-success">
+                    <a class="btn text-success" (click)="openBlocShowForm(bloc)">
                       <span class="material-icons"> expand </span></a>
                     <a class="btn text-warning" (click)="openBlocUpdateForm(bloc)">
                       <span class="material-icons"> edit </span></a>

@@ -98,4 +98,29 @@
   </div>
 </div>
 
+<div class="mx-5 my-5 justify-content-evenly" *ngIf="action=='show'">
+  <h1 class="text-light text-center" *ngIf="bloc != undefined">Bloc {{bloc.nomBloc}}</h1>
+  <div *ngIf="chambres != undefined && chambres.length > 0">
+  <div class="row" >
+    <div class="col-sm-6" *ngFor="let chambre of chambres">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{chambre.numeroChambre}}</h5>
+          <p class="card-text">{{chambre.typeC}}</p>
+          <a href="#" class="btn btn-primary">Afficher chambre</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="col-10 my-5 mx-5 " *ngIf="chambres == undefined || chambres.length == 0">
+    <div class="card ">
+      <div class="card-body justify-content-center align-content-center">
+        <h5 class="card-title ">Pas de chambres affecté à ce bloc</h5>
+        <p class="card-text">Affecter des chambres à ce bloc pour les voir ici</p>
+        <a href="#" class="btn btn-primary disabled">Afficher chambre</a>
+      </div>
+    </div>
+  </div>
+</div>
 

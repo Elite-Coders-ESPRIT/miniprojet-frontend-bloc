@@ -1,6 +1,7 @@
 import {Component, Inject, Input} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Bloc} from "../model/bloc";
+import {Chambre} from "../model/chambre";
 
 @Component({
   selector: 'app-bloc-form',
@@ -14,11 +15,14 @@ export class BlocFormComponent {
     nomBloc: string="";
   };
   @Input() bloc? : Bloc;
-
+  chambres? : Chambre[];
 
   constructor(private dialogRef: MatDialogRef<BlocFormComponent>,@Inject(MAT_DIALOG_DATA) public data: { action: string, bloc: Bloc}) {
     this.action = data.action;
     this.bloc = data.bloc;
+    if(data.bloc.chambres != undefined && data.bloc.chambres?.length > 0  ){
+      this.chambres = data.bloc.chambres!;
+    }
   }
 
   onUpdate(): void {
