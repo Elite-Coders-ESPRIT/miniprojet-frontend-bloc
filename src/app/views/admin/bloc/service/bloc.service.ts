@@ -43,6 +43,10 @@ export class BlocService {
     return this.http.put<Bloc>(`${this.baseUrl}/updateBloc`, bloc);
   }
 
+  addBloc(bloc:Bloc): Observable<Bloc> {
+    return this.http.post(this.baseUrl+'/addBloc',bloc);
+  }
+
 
 
 }

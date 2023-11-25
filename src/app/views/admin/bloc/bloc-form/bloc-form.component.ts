@@ -10,20 +10,29 @@ import {FormsModule} from "@angular/forms";
 })
 export class BlocFormComponent {
   @Input() action? : string;
+  blocToAdd : Bloc = new class implements Bloc {
+    capaciteBloc: number=0;
+    nomBloc: string="";
+  };
   @Input() bloc? : Bloc;
 
 
-  constructor(private dialogRef: MatDialogRef<BlocFormComponent>,@Inject(MAT_DIALOG_DATA) public data: { action: string,bloc: Bloc }) {
+  constructor(private dialogRef: MatDialogRef<BlocFormComponent>,@Inject(MAT_DIALOG_DATA) public data: { action: string, bloc: Bloc}) {
     this.action = data.action;
     this.bloc = data.bloc;
   }
 
   onUpdate(): void {
-    this.dialogRef.close(this.bloc); // Close the dialog and pass the updated bloc
+    this.dialogRef.close(this.bloc);
   }
 
   onCancel(): void {
     console.log(this.bloc);
-    this.dialogRef.close(); // Close the dialog without updating
+    this.dialogRef.close();
+  }
+
+  onInsert(): void {
+    console.log(this.blocToAdd);
+    this.dialogRef.close(this.blocToAdd);
   }
 }

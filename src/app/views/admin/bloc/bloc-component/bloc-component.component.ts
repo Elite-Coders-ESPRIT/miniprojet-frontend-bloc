@@ -14,6 +14,7 @@ import {Router} from "@angular/router";
 export class BlocComponentComponent implements OnInit{
 
   blocs? : Bloc[];
+  bloc? : Bloc;
 
   constructor(private blocService: BlocService,private dialog:MatDialog) {
 
@@ -31,11 +32,15 @@ export class BlocComponentComponent implements OnInit{
       width: '50%',
       height: '50%',
       data : {
-        action : 'add'
+        action : 'add',
       }
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog closed with result: ${result}`);
+      if(result ){
+        this.insertBloc(result);
+        this.blocService.refreshPage();
+      }
     });
   }
 
@@ -51,7 +56,6 @@ export class BlocComponentComponent implements OnInit{
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // If the form was submitted, update the bloc
         this.updateBloc(result);
       }
     })
@@ -60,7 +64,6 @@ export class BlocComponentComponent implements OnInit{
 
 
   deleteItem(idBloc:string): void {
-
     const confirmed = window.confirm('Are you sure you want to delete?');
 
     if (confirmed) {
@@ -73,13 +76,18 @@ export class BlocComponentComponent implements OnInit{
       }
     }
 
-
   updateBloc(bloc: Bloc): void {
     this.blocService.updateBloc(bloc).subscribe(updatedBloc => {
-      // Handle the updated bloc as needed
       console.log('Bloc updated:', updatedBloc);
     });
   }
 
+  insertBloc(bloc:Bloc): void {
+    this.blocService.addBloc(bloc).subscribe(addedBloc => {
+      console.log(this.bloc);
+      console.log(bloc);
+      console.log(addedBloc);
+    })
+}
 
 }

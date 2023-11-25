@@ -31,15 +31,11 @@
 <div class="card-body">
   <form role="form">
     <div class="mb-3">
-      <input type="text" class="form-control form-control-lg" placeholder="Nom bloc" aria-label="Nom bloc">
+      <input type="text" class="form-control form-control-lg" [(ngModel)]="blocToAdd.nomBloc" placeholder="nomBloc" [ngModelOptions]="{standalone : true}" aria-label="Nom bloc">
     </div>
     <div class="mb-3">
-      <input type="number" class="form-control form-control-lg" placeholder="Capacité" aria-label="Capacité">
+      <input type="number" class="form-control form-control-lg" [ngModelOptions]="{standalone : true}" [(ngModel)]="blocToAdd.capaciteBloc"  placeholder="capaciteBloc"  aria-label="Capacité" >
     </div>
-<!--    <div class="form-check form-switch">-->
-<!--      <input class="form-check-input" type="checkbox" id="rememberMe">-->
-<!--      <label class="form-check-label" for="rememberMe">Remember me</label>-->
-<!--    </div>-->
     <div class="d-flex justify-content-center">
       <div class="btn-group">
         <button
@@ -74,10 +70,10 @@
 
 
     <div class="text-center">
-      <button type="button" class="btn btn-lg btn-outline-success btn-lg w-100 mt-4 mb-0">INSERT</button>
+      <button type="button" (click)="onInsert()" class="btn btn-lg btn-outline-success btn-lg w-100 mt-4 mb-0">INSERT</button>
     </div>
     <div class="text-center">
-      <button type="button" class="btn btn-lg btn-outline-white btn-lg w-100 mt-4 mb-0">CANCEL</button>
+      <button type="button" (click)="onCancel()" class="btn btn-lg btn-outline-white btn-lg w-100 mt-4 mb-0">CANCEL</button>
     </div>
   </form>
 </div>
