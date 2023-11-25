@@ -14,8 +14,9 @@
             ></span>
         <input
           type="text"
+          [(ngModel)]="searchTerm"
           class="form-control"
-          placeholder="Search blocks..."
+          placeholder="Rechercher des bloc par nom..."
         />
       </div>
     </div>
@@ -39,7 +40,7 @@
                 </tr>
                 </thead>
                 <tbody *ngIf="blocs != null && (blocs.length > 0)">
-                <tr *ngFor="let bloc of blocs">
+                <tr *ngFor="let bloc of blocs | filterByBlocName : searchTerm">
                   <th>{{bloc.idBloc}}</th>
                   <th><p>{{bloc.nomBloc}}</p></th>
                   <td>{{bloc.capaciteBloc}} </td>

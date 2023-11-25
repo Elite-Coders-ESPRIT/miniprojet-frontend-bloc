@@ -1,20 +1,21 @@
 import { Component,OnInit  } from '@angular/core';
 import {BlocService} from "../service/bloc.service";
 import {Bloc} from "../model/bloc";
-import {Observable} from "rxjs";
 import { MatDialog } from '@angular/material/dialog';
 import {BlocFormComponent} from "../bloc-form/bloc-form.component";
-import {Router} from "@angular/router";
+import {FilterByBlocNamePipe} from "../pipe/filter-by-bloc-name.pipe";
 
 @Component({
   selector: 'app-bloc-component',
   templateUrl: './bloc-component.component.html',
-  styleUrls: ['./bloc-component.component.css']
+  styleUrls: ['./bloc-component.component.css'],
+  providers:[FilterByBlocNamePipe]
 })
 export class BlocComponentComponent implements OnInit{
 
   blocs? : Bloc[];
   bloc? : Bloc;
+  searchTerm: string = '';
 
   constructor(private blocService: BlocService,private dialog:MatDialog) {
 
@@ -61,8 +62,6 @@ export class BlocComponentComponent implements OnInit{
     })
   }
 
-
-
   deleteItem(idBloc:string): void {
     const confirmed = window.confirm('Are you sure you want to delete?');
 
@@ -88,6 +87,6 @@ export class BlocComponentComponent implements OnInit{
       console.log(bloc);
       console.log(addedBloc);
     })
-}
+  }
 
 }

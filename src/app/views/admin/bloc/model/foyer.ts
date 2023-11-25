@@ -1,10 +1,11 @@
+import {Bloc} from "./bloc";
 
 
-export interface Bloc {
+export interface Foyer {
 
-  idBloc? : number;
-  nomBloc? : string;
-  capaciteBloc? : number;
-  foyer? : any;
+  idFoyer? : number;
+  nomFoyer? : string;
+  capaciteFoyer? : number;
+  bloc? : Bloc;
 
 }

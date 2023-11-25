@@ -1,7 +1,6 @@
 import {Component, Inject, Input} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Bloc} from "../model/bloc";
-import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-bloc-form',
