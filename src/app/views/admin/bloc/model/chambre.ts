@@ -6,7 +6,7 @@ export interface Chambre {
   idChambre? : number;
   numeroChambre? : string;
   reservations? : any;
-  typeC? : string;
+  typeChambre? : string;
   bloc? : Bloc;
 
 }

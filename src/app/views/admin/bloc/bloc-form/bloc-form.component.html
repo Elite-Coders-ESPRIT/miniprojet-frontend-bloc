@@ -1,3 +1,4 @@
+
 <!--<div *ngIf="action==='add'">-->
 <!--<h2>Form in Dialog</h2>-->
 <!--<form>-->
@@ -27,7 +28,7 @@
 <!--  </form>-->
 <!--  <button (click)="close()">Cancel</button>-->
 <!--</div>-->
-<div class="mx-3 my-4 "  *ngIf="action==='add'">
+<div class="container my-5"  *ngIf="action==='add'">
 <div class="card-body">
   <form role="form">
     <div class="mb-3">
@@ -99,15 +100,15 @@
 </div>
 
 <div class="mx-5 my-5 justify-content-evenly" *ngIf="action=='show'">
-  <h1 class="text-light text-center" *ngIf="bloc != undefined">Bloc {{bloc.nomBloc}}</h1>
+  <h1 class="text-light text-center" *ngIf="chambres != undefined && bloc != undefined">Bloc {{bloc.nomBloc}}</h1>
   <div *ngIf="chambres != undefined && chambres.length > 0">
   <div class="row" >
     <div class="col-sm-6" *ngFor="let chambre of chambres">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">{{chambre.numeroChambre}}</h5>
-          <p class="card-text">{{chambre.typeC}}</p>
-          <a href="#" class="btn btn-primary">Afficher chambre</a>
+          <p class="card-text">{{chambre.typeChambre}}</p>
+          <a href="#" class="btn btn-primary btn-round">Afficher chambre</a>
         </div>
       </div>
     </div>
@@ -118,9 +119,8 @@
       <div class="card-body justify-content-center align-content-center">
         <h5 class="card-title ">Pas de chambres affecté à ce bloc</h5>
         <p class="card-text">Affecter des chambres à ce bloc pour les voir ici</p>
-        <a href="#" class="btn btn-primary disabled">Afficher chambre</a>
+        <a href="#" class="btn btn-rounded btn-behance">Affecter des chambre</a>
       </div>
     </div>
   </div>
 </div>
-

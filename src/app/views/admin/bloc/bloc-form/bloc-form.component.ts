@@ -1,4 +1,4 @@
-import {Component, Inject, Input} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Bloc} from "../model/bloc";
 import {Chambre} from "../model/chambre";
@@ -8,11 +8,12 @@ import {Chambre} from "../model/chambre";
   templateUrl: './bloc-form.component.html',
   styleUrls: ['./bloc-form.component.css']
 })
-export class BlocFormComponent {
+export class BlocFormComponent implements OnInit{
   @Input() action? : string;
   blocToAdd : Bloc = new class implements Bloc {
     capaciteBloc: number=0;
     nomBloc: string="";
+    chambres: Chambre[] = [];
   };
   @Input() bloc? : Bloc;
   chambres? : Chambre[];
@@ -20,8 +21,11 @@ export class BlocFormComponent {
   constructor(private dialogRef: MatDialogRef<BlocFormComponent>,@Inject(MAT_DIALOG_DATA) public data: { action: string, bloc: Bloc}) {
     this.action = data.action;
     this.bloc = data.bloc;
-    if(data.bloc.chambres != undefined && data.bloc.chambres?.length > 0  ){
-      this.chambres = data.bloc.chambres!;
+  }
+
+  ngOnInit() {
+    if(undefined != this.data.bloc.chambres && this.data.bloc.chambres.length > 0 ){
+      this.chambres = this.data.bloc.chambres;
     }
   }
 
