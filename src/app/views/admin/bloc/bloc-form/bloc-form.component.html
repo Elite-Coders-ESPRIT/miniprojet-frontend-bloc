@@ -1,89 +1,42 @@
+<div class="card-body pt-2 pb-8" style="background-color: white">
 
-<!--<div *ngIf="action==='add'">-->
-<!--<h2>Form in Dialog</h2>-->
-<!--<form>-->
-<!--  &lt;!&ndash; Your form fields go here &ndash;&gt;-->
-<!--  <label for="name">Name:</label>-->
-<!--  <input type="text" id="name" name="name" required>-->
-<!--  <br>-->
-<!--  <label for="email">Email:</label>-->
-<!--  <input type="email" id="email" name="email" required>-->
-<!--  <br>-->
-<!--  <button type="submit">Submit</button>-->
-<!--</form>-->
-<!--<button (click)="close()">Cancel</button>-->
-<!--</div>-->
-
-<!--<div *ngIf="action==='update'">-->
-<!--  <h2>Form in Dialog</h2>-->
-<!--  <form>-->
-<!--    &lt;!&ndash; Your form fields go here &ndash;&gt;-->
-<!--    <label for="name">Name:</label>-->
-<!--    <input type="text" id="name" name="name" required>-->
-<!--    <br>-->
-<!--    <label for="email">Email:</label>-->
-<!--    <input type="email" id="email" name="email" required>-->
-<!--    <br>-->
-<!--    <button type="submit">Update</button>-->
-<!--  </form>-->
-<!--  <button (click)="close()">Cancel</button>-->
-<!--</div>-->
 <div class="container my-5"  *ngIf="action==='add'">
-<div class="card-body">
-  <form role="form">
+  <div class="card-body">
+  <form role="form" #myForm="ngForm">
     <div class="mb-3">
       <input type="text" class="form-control form-control-lg" [(ngModel)]="blocToAdd.nomBloc" placeholder="nomBloc" [ngModelOptions]="{standalone : true}" aria-label="Nom bloc">
     </div>
     <div class="mb-3">
       <input type="number" class="form-control form-control-lg" [ngModelOptions]="{standalone : true}" [(ngModel)]="blocToAdd.capaciteBloc"  placeholder="capaciteBloc"  aria-label="Capacité" >
     </div>
-    <div class="d-flex justify-content-center">
-      <div class="btn-group">
-        <button
-          type="button"
-          class="btn btn-secondary dropdown-toggle"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <i class=" cursor-pointer"></i>
-          Select foyer...
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end py-3">
-          <li class="mb-2">
-            <a class="dropdown-item border-radius-md" href="javascript:;">
-              <div class="d-flex">
-                <div class="justify-content-center">
-                  <h6 class="text-sm font-weight-normal mb-1">
-                    <span class="font-weight-bold">New album</span> by
-                    Travis Scott
-                  </h6>
-                  <p class="text-xs text-secondary mb-0">
-                    <i class="fa fa-clock me-1"></i>
-                    1 day
-                  </p>
-                </div>
-              </div>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-
+    <select class="form-select-lg mb-3" [(ngModel)]="idFoyer" [ngModelOptions]="{standalone : true}" name="foyer" aria-label="Default select example">
+      <option value="none" selected>Selectinner un foyer...</option>
+      <option  *ngFor="let foyer of foyers" [value]="foyer.idFoyer">{{foyer.nomFoyer}}({{foyer.universite != null && foyer.universite != undefined ? foyer.universite.nomUniversite : "Université inconnu"}})</option>
+    </select>
+    <div class="d-flex justify-content-evenly my-5">
 
     <div class="text-center">
-      <button type="button" (click)="onInsert()" class="btn btn-lg btn-outline-success btn-lg w-100 mt-4 mb-0">INSERT</button>
+      <button type="button" (click)="onInsert()" class="btn btn-lg btn-outline-success btn-lg w-100 mt-4 mb-0" [disabled]="!myForm.valid">INSERT</button>
     </div>
     <div class="text-center">
-      <button type="button" (click)="onCancel()" class="btn btn-lg btn-outline-white btn-lg w-100 mt-4 mb-0">CANCEL</button>
+      <button type="button" (click)="onCancel()" class="btn btn-lg btn-outline-danger btn-lg w-100 mt-4 mb-0">CANCEL</button>
+    </div>
     </div>
   </form>
 </div>
+
 </div>
 <div class="mx-3 my-4" *ngIf="action === 'update' && bloc">
+
   <div class="card-body">
     <form role="form">
       <div class="mb-3">
-        <input [(ngModel)]="bloc.nomBloc" type="text" name="nomBloc" class="form-control form-control-lg" placeholder="Nom bloc" aria-label="Nom bloc">
+        <div class="form-row">
+          <div class="col-md-4 mb-3">
+          </div>
+          </div>
+
+        <input [(ngModel)]="bloc.nomBloc" type="text" name="nomBloc" class="form-control form-control-lg" placeholder="Nom bloc" aria-label="Nom bloc" >
       </div>
       <div class="mb-3">
         <input [(ngModel)]="bloc.capaciteBloc" type="number" name="capaciteBloc" class="form-control form-control-lg" placeholder="Capacité" aria-label="Capacité">
@@ -93,15 +46,15 @@
         <button type="submit" class="btn btn-lg btn-outline-success btn-lg w-100 mt-4 mb-0" (click)="onUpdate()">UPDATE</button>
       </div>
       <div class="text-center">
-        <button type="button" class="btn btn-lg btn-outline-white btn-lg w-100 mt-4 mb-0" (click)="onCancel()">CANCEL</button>
+        <button type="button" class="btn btn-lg btn-outline-danger btn-lg w-100 mt-4 mb-0" (click)="onCancel()">CANCEL</button>
       </div>
     </form>
   </div>
 </div>
 
-<div class="mx-5 my-5 justify-content-evenly" *ngIf="action=='show'">
-  <h1 class="text-light text-center" *ngIf="chambres != undefined && bloc != undefined">Bloc {{bloc.nomBloc}}</h1>
-  <div *ngIf="chambres != undefined && chambres.length > 0">
+<div class="mx-5 my-5 justify-content-around" *ngIf="action=='show'">
+  <h1 class="text-bold text-black-50 text-center" *ngIf="chambres != undefined && bloc != undefined">Bloc {{bloc.nomBloc}}</h1>
+  <div class="my-5" *ngIf="chambres != undefined && chambres.length > 0">
   <div class="row" >
     <div class="col-sm-6" *ngFor="let chambre of chambres">
       <div class="card">
@@ -109,6 +62,7 @@
           <h5 class="card-title">{{chambre.numeroChambre}}</h5>
           <p class="card-text">{{chambre.typeChambre}}</p>
           <a href="#" class="btn btn-primary btn-round">Afficher chambre</a>
+          <a *ngIf="bloc" (click)="desaffecter(chambre,bloc)" class="btn btn-danger btn-round">Désaffecter</a>
         </div>
       </div>
     </div>
@@ -119,8 +73,18 @@
       <div class="card-body justify-content-center align-content-center">
         <h5 class="card-title ">Pas de chambres affecté à ce bloc</h5>
         <p class="card-text">Affecter des chambres à ce bloc pour les voir ici</p>
-        <a href="#" class="btn btn-rounded btn-behance">Affecter des chambre</a>
+        <p>
+          <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Affecter des chambres
+          </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+              <app-affectation-chambre [blocFromParent]="bloc"></app-affectation-chambre>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</div>
 </div>

@@ -4,7 +4,7 @@ import {Bloc} from "./bloc";
 export interface Chambre {
 
   idChambre? : number;
-  numeroChambre? : string;
+  numeroChambre? : number;
   reservations? : any;
   typeChambre? : string;
   bloc? : Bloc;

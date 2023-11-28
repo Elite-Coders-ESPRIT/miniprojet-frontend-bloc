@@ -10,6 +10,9 @@ import {MatButtonModule} from "@angular/material/button";
 import { BlocFormComponent } from './bloc-form/bloc-form.component';
 import {FormsModule} from "@angular/forms";
 import { FilterByBlocNamePipe } from './pipe/filter-by-bloc-name.pipe';
+import { AffectationChambreComponent } from './affectation-chambre/affectation-chambre.component';
+
+
 
 
 @NgModule({
@@ -17,15 +20,16 @@ import { FilterByBlocNamePipe } from './pipe/filter-by-bloc-name.pipe';
     BlocComponentComponent,
     BlocFormComponent,
     FilterByBlocNamePipe,
+    AffectationChambreComponent,
   ],
-  imports: [
-    CommonModule,
-    BlocRoutingModule,
-    MatExpansionModule,
-    MatIconModule,
-    MatButtonModule,
-    FormsModule,
-  ],
+    imports: [
+        CommonModule,
+        BlocRoutingModule,
+        MatExpansionModule,
+        MatIconModule,
+        MatButtonModule,
+        FormsModule,
+    ],
   bootstrap : [AppComponent]
 })
 export class BlocModule { }

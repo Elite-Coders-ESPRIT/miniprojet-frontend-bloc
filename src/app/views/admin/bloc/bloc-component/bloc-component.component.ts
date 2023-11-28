@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {BlocFormComponent} from "../bloc-form/bloc-form.component";
 import {FilterByBlocNamePipe} from "../pipe/filter-by-bloc-name.pipe";
 import {Chambre} from "../model/chambre";
+import {Foyer} from "../model/foyer";
 
 @Component({
   selector: 'app-bloc-component',
@@ -18,29 +19,44 @@ export class BlocComponentComponent implements OnInit{
   bloc? : Bloc;
   chambres? : Chambre[];
   searchTerm: string = '';
+  idBlocToUpdate? : number;
+  foyerToAdd? : Foyer;
 
+  pageSize = 5;
+  currentPage = 1;
+
+  get paginatedItems() {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    if (this.blocs != undefined){
+      return this.blocs.slice(startIndex, startIndex + this.pageSize);
+    }
+    return null;
+  }
+  get totalPages() {
+    return this.blocs!.length % this.pageSize === 0
+      ? this.blocs!.length / this.pageSize
+      : Math.floor(this.blocs!.length / this.pageSize) + 1;
+  }
   constructor(private blocService: BlocService,private dialog:MatDialog) {
 
   }
   ngOnInit() {
     this.blocService.getBlocs().forEach(data => {
-      console.log(data);
       this.blocs = data;
-      console.log(this.blocs);
     }).then(r => {console.log("r : ",r)});
   }
 
   openBlocAddForm(): void {
     const dialogRef = this.dialog.open(BlocFormComponent, {
       width: '50%',
-      height: '50%',
+      height: '65%',
       data : {
         action : 'add',
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog closed with result: ${result}`);
-      if(result ){
+      if(result){
+        console.log("DATA TO ADD :",result);
         this.insertBloc(result);
         this.blocService.refreshPage();
       }
@@ -51,7 +67,7 @@ export class BlocComponentComponent implements OnInit{
   openBlocUpdateForm(bloc: Bloc): void {
     const dialogRef = this.dialog.open(BlocFormComponent, {
       width: '50%',
-      height: '50%',
+      height: '56%',
       data : {
         action : 'update',
         bloc: bloc
@@ -99,11 +115,16 @@ export class BlocComponentComponent implements OnInit{
     });
   }
 
-  insertBloc(bloc:Bloc): void {
-    this.blocService.addBloc(bloc).subscribe(addedBloc => {
-      console.log(this.bloc);
-      console.log(bloc);
-      console.log(addedBloc);
+  insertBloc(dataToAdd:any): void {
+    this.foyerToAdd = dataToAdd.foyers;
+    console.log(this.foyerToAdd);
+    this.blocService.addBloc(dataToAdd.bloc).subscribe(addedBloc => {
+      console.log("added bloc : ",addedBloc);
+      addedBloc.foyers = this.foyerToAdd;
+      console.log("FOYER : ",addedBloc.foyers);
+      this.blocService.updateBloc(addedBloc).subscribe(value => {
+        console.log("NEXT : ",value);
+      });
     })
   }
 

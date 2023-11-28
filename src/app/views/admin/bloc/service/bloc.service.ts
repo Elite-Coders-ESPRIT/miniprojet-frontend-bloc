@@ -3,6 +3,8 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {Observable} from "rxjs";
 import {Bloc} from "../model/bloc";
 import {Router} from "@angular/router";
+import {Foyer} from "../model/foyer";
+import {Chambre} from "../model/chambre";
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +49,16 @@ export class BlocService {
     return this.http.post(this.baseUrl+'/addBloc',bloc);
   }
 
+  getFoyers(): Observable<Foyer[]>{
+    return this.http.get<Foyer[]>("http://localhost:8081/foyer/getAllFoyers");
+  }
 
+  getFoyerById(id:number | undefined): Observable<Foyer>{
+    return this.http.get<Foyer>("http://localhost:8081/foyer/"+id);
+  }
+
+  getAllUnassignedChambres(): Observable<Chambre[]>{
+    return this.http.get<Chambre[]>("http://localhost:8081/chambre/unassigned");
+  }
 
 }
