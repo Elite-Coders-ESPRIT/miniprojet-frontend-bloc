@@ -8,8 +8,55 @@
           <div class="col-10">Ajouter un bloc</div></div>
       </button>
     </div>
+    <div *ngIf="showDeleteToast">
+      <div class="row">
+        <div class="col-3">
+          <div class="alert alert-success justify-content-center" role="alert">
+          <p>
+            Bloc supprimé avec succès
+          </p>
+          </div>
+        </div>
+        <div class="col-6">
+        </div>
+        <div class="col-3">
+        </div>
+      </div>
+    </div>
+    <div *ngIf="showInsertToast">
+      <div class="row">
+        <div class="col-3">
+          <div class="alert alert-success justify-content-center" role="alert">
+          <p>
+            Bloc a été ajouté avec succès
+          </p>
+          </div>
+        </div>
+        <div class="col-6">
+        </div>
+        <div class="col-3">
+        </div>
+      </div>
+    </div>
+    <div *ngIf="showUpdateToast">
+      <div class="row">
+        <div class="col-3">
+          <div class="alert alert-success justify-content-center" role="alert">
+          <p>
+            Bloc est mis à jour
+          </p>
+          </div>
+        </div>
+        <div class="col-6">
+        </div>
+        <div class="col-3">
+        </div>
+      </div>
+    </div>
+
     <div class="col my-4">
     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+
       <div class="input-group">
             <span class="input-group-text text-body"
             ><i class="fas fa-search" aria-hidden="true"></i

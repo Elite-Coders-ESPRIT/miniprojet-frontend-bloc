@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BlocService} from "../service/bloc.service";
 import {Chambre} from "../model/chambre";
-import {Bloc} from "../model/bloc";
 
 @Component({
   selector: 'app-affectation-chambre',
@@ -10,10 +9,10 @@ import {Bloc} from "../model/bloc";
 })
 export class AffectationChambreComponent implements OnInit  {
 
-  @Input() blocFromParent?: Bloc;
+  @Input() blocFromParent?: any;
   chambres!: Chambre[];
   selectedChambres!: Chambre[];
-
+  @Output() myEvent = new EventEmitter<boolean>();
   constructor(private blocService:BlocService) {
 
   }
@@ -27,13 +26,13 @@ export class AffectationChambreComponent implements OnInit  {
 }
 
   affecter() {
-    console.log("Chambres a affecter : ",this.selectedChambres);
+    // console.log("Chambres a affecter : ",this.selectedChambres);
+    this.myEvent.emit(true);
     if(this.blocFromParent){
       this.blocFromParent.chambres = this.selectedChambres;
       console.log("affectation du front : ",this.blocFromParent.chambres);
       this.blocService.updateBloc(this.blocFromParent).subscribe((updatedBloc) => {
         console.log(updatedBloc);
-        this.blocService.refreshPage();
       })
     }
   }

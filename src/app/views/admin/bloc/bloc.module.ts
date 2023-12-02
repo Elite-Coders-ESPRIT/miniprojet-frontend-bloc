@@ -14,7 +14,6 @@ import { AffectationChambreComponent } from './affectation-chambre/affectation-c
 
 
 
-
 @NgModule({
   declarations: [
     BlocComponentComponent,
@@ -30,6 +29,8 @@ import { AffectationChambreComponent } from './affectation-chambre/affectation-c
         MatButtonModule,
         FormsModule,
     ],
-  bootstrap : [AppComponent]
+  bootstrap : [AppComponent],
+  // providers:
+  //   { provide: TOAST_SERVICE_TOKEN, useClass: ToastService }
 })
 export class BlocModule { }

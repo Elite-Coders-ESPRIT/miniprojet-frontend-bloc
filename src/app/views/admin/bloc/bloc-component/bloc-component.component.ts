@@ -25,6 +25,11 @@ export class BlocComponentComponent implements OnInit{
   pageSize = 5;
   currentPage = 1;
 
+  showDeleteToast?: boolean = false;
+  showUpdateToast?: boolean = false;
+  showInsertToast?: boolean = false;
+
+
   get paginatedItems() {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     if (this.blocs != undefined){
@@ -44,6 +49,9 @@ export class BlocComponentComponent implements OnInit{
     this.blocService.getBlocs().forEach(data => {
       this.blocs = data;
     }).then(r => {console.log("r : ",r)});
+    if(this.showDeleteToast || this.showInsertToast || this.showUpdateToast){
+      this.hideToastAfterDelay();
+    }
   }
 
   openBlocAddForm(): void {
@@ -55,10 +63,12 @@ export class BlocComponentComponent implements OnInit{
       }
     });
     dialogRef.afterClosed().subscribe(result => {
+      this.showDeleteToast= true;
       if(result){
         console.log("DATA TO ADD :",result);
         this.insertBloc(result);
         this.blocService.refreshPage();
+        this.showInsertToast = true;
       }
     });
   }
@@ -98,7 +108,6 @@ export class BlocComponentComponent implements OnInit{
 
   deleteItem(idBloc:string): void {
     const confirmed = window.confirm('Are you sure you want to delete?');
-
     if (confirmed) {
       console.log(idBloc);
       this.blocService.deleteBloc(idBloc.toString());
@@ -112,6 +121,8 @@ export class BlocComponentComponent implements OnInit{
   updateBloc(bloc: Bloc): void {
     this.blocService.updateBloc(bloc).subscribe(updatedBloc => {
       console.log('Bloc updated:', updatedBloc);
+      this.showUpdateToast = true;
+      this.hideToastAfterDelay();
     });
   }
 
@@ -125,7 +136,15 @@ export class BlocComponentComponent implements OnInit{
       this.blocService.updateBloc(addedBloc).subscribe(value => {
         console.log("NEXT : ",value);
       });
-    })
+    });
+    this.showInsertToast = true;
+  }
+  private hideToastAfterDelay(): void {
+    setTimeout(() => {
+      this.showDeleteToast = false;
+      this.showUpdateToast = false;
+      this.showInsertToast = false;
+    }, 3000);
   }
 
 }

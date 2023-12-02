@@ -18,13 +18,17 @@ export class BlocFormComponent implements OnInit {
     nomBloc: string = "";
     chambres: Chambre[] = [];
   };
-  idFoyer?: number;
+  idFoyer: number = 0;
   @Input() bloc?: Bloc;
+  dataToSend?: any;
   chambres?: Chambre[];
   foyers?: Foyer[];
   foyer?: Foyer;
   dataToAdd?: any;
   myForm!: FormGroup;
+
+  receivedEvent: boolean = false;
+
 
 
   constructor(private dialogRef: MatDialogRef<BlocFormComponent>, @Inject(MAT_DIALOG_DATA) public data: { action: string, bloc: Bloc }, private blocService: BlocService,private fb: FormBuilder) {
@@ -36,7 +40,18 @@ export class BlocFormComponent implements OnInit {
     });
   }
 
+  formIsValid(): boolean {
+    return (
+      this.blocToAdd.nomBloc != '' &&
+      this.idFoyer != 0
+    );
+  }
+
   ngOnInit() {
+    this.dataToSend = {
+      bloc : this.bloc,
+      dialogRef : this.dialogRef
+    }
     if (this.data.action == "show" && undefined != this.data.bloc.chambres && this.data.bloc.chambres.length > 0) {
       this.chambres = this.data.bloc.chambres;
     }
@@ -57,17 +72,20 @@ export class BlocFormComponent implements OnInit {
   }
 
   onInsert(): void {
-    if (this.idFoyer != undefined) {
+    if (this.idFoyer != undefined && this.idFoyer > 0) {
       this.blocService.getFoyerById(this.idFoyer).forEach(val => {
           this.foyer = val;
           this.dataToAdd = {
             bloc: this.blocToAdd,
             foyers: this.foyer
           }
+
           console.log("dataToAdd from form :", this.dataToAdd);
           this.dialogRef.close(this.dataToAdd);
         }
       );
+    }else if (this.idFoyer == 0){
+
     }
   }
 
@@ -79,5 +97,13 @@ export class BlocFormComponent implements OnInit {
       console.log(blocUpdated);
       this.blocService.refreshPage();
     });
+  }
+
+  handleEvent(event:boolean) {
+    this.receivedEvent = event;
+    if(this.receivedEvent){
+      this.dialogRef.close();
+      this.blocService.refreshPage();
+    }
   }
 }
