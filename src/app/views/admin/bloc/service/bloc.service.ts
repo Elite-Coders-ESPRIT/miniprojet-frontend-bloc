@@ -11,7 +11,7 @@ import {Chambre} from "../model/chambre";
 })
 export class BlocService {
 
-  private baseUrl ="http://localhost:8081/bloc"
+  private baseUrl ="http://localhost:8081/TpEtudeDeCas/bloc"
 
   constructor(private http: HttpClient,private router:Router) {
 
@@ -50,15 +50,15 @@ export class BlocService {
   }
 
   getFoyers(): Observable<Foyer[]>{
-    return this.http.get<Foyer[]>("http://localhost:8081/foyer/getAllFoyers");
+    return this.http.get<Foyer[]>("http://localhost:8081/TpEtudeDeCas/foyer/getAllFoyers");
   }
 
   getFoyerById(id:number | undefined): Observable<Foyer>{
-    return this.http.get<Foyer>("http://localhost:8081/foyer/"+id);
+    return this.http.get<Foyer>("http://localhost:8081/TpEtudeDeCas/foyer/"+id);
   }
 
   getAllUnassignedChambres(): Observable<Chambre[]>{
-    return this.http.get<Chambre[]>("http://localhost:8081/chambre/unassigned");
+    return this.http.get<Chambre[]>("http://localhost:8081/TpEtudeDeCas/chambre/unassigned");
   }
 
 }
