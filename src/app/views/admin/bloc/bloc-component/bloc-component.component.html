@@ -90,7 +90,7 @@
                 </tr>
                 </thead>
                 <tbody *ngIf="blocs != null && (blocs.length > 0)">
-                <tr *ngFor="let bloc of blocs | filterByBlocName : searchTerm">
+                <tr *ngFor="let bloc of blocs | filterByBlocName : searchTerm" appHighlight bgcolor="#d3d3d3">
                   <th><p>{{bloc.nomBloc}}</p></th>
                   <td>{{bloc.capaciteBloc}} </td>
                   <td class="col">

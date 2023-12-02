@@ -11,6 +11,7 @@ import { BlocFormComponent } from './bloc-form/bloc-form.component';
 import {FormsModule} from "@angular/forms";
 import { FilterByBlocNamePipe } from './pipe/filter-by-bloc-name.pipe';
 import { AffectationChambreComponent } from './affectation-chambre/affectation-chambre.component';
+import { HighlightDirective } from './highlight.directive';
 
 
 
@@ -20,6 +21,7 @@ import { AffectationChambreComponent } from './affectation-chambre/affectation-c
     BlocFormComponent,
     FilterByBlocNamePipe,
     AffectationChambreComponent,
+    HighlightDirective,
   ],
     imports: [
         CommonModule,
